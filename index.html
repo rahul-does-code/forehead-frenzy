@@ -200,7 +200,9 @@
 
   /* ---------- Stage (pre-round + play): forced landscape ---------- */
   #stage {
-    position: fixed; inset: 0;
+    position: fixed;
+    /* keep the game out from under the notch / home indicator / rounded corners */
+    inset: env(safe-area-inset-top, 0px) env(safe-area-inset-right, 0px) env(safe-area-inset-bottom, 0px) env(safe-area-inset-left, 0px);
     background: var(--bg);
     touch-action: none;
     user-select: none;
@@ -209,12 +211,18 @@
   }
   #stage[hidden] { display: none; }
   @media (orientation: portrait) {
+    /* rotated 90°: stage x-axis runs down the physical screen, stage y-axis runs
+       right-to-left — so physical top/bottom insets trim the stage WIDTH and the
+       physical left/right insets trim its HEIGHT */
     #stage {
       inset: auto;
-      top: 0;
-      left: 100vw; left: 100dvw;
-      width: 100vh; width: 100dvh;
-      height: 100vw; height: 100dvw;
+      top: env(safe-area-inset-top, 0px);
+      left: calc(100vw - env(safe-area-inset-right, 0px));
+      left: calc(100dvw - env(safe-area-inset-right, 0px));
+      width: calc(100vh - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px));
+      width: calc(100dvh - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px));
+      height: calc(100vw - env(safe-area-inset-left, 0px) - env(safe-area-inset-right, 0px));
+      height: calc(100dvw - env(safe-area-inset-left, 0px) - env(safe-area-inset-right, 0px));
       transform: rotate(90deg);
       transform-origin: left top;
     }
