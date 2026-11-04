@@ -12,11 +12,11 @@
 
 <style>
   :root {
-    --bg: #14122B;
-    --bg-raised: #201D40;
-    --line: #383263;
-    --ink: #FFF6E0;
-    --dim: #A79FCB;
+    --bg: #12102A;
+    --bg-raised: #1C1A3A;
+    --line: #2F2B58;
+    --ink: #FAF4E6;
+    --dim: #9D97C4;
     --accent: #F5379B;
     --brass: #FFC53D;
     --win: #1FC16B;
@@ -31,12 +31,20 @@
   html, body {
     margin: 0; padding: 0;
     background: var(--bg);
+    -webkit-font-smoothing: antialiased;
     color: var(--ink);
     font-family: var(--ui);
     overscroll-behavior: none;
     -webkit-touch-callout: none;
   }
-  body { min-height: 100vh; min-height: 100dvh; }
+  body {
+    min-height: 100vh; min-height: 100dvh;
+    background:
+      radial-gradient(120% 60% at 50% -10%, rgba(123,108,246,.22), transparent 60%),
+      radial-gradient(80% 40% at 100% 0%, rgba(245,55,155,.12), transparent 60%),
+      var(--bg);
+    background-attachment: fixed;
+  }
 
   button {
     font-family: var(--ui);
@@ -60,42 +68,43 @@
   }
 
   .marquee {
-    border: 6px dotted var(--brass);
-    border-radius: 20px;
-    padding: 22px 16px 18px;
+    border: 1px solid var(--line);
+    border-radius: 22px;
+    padding: 26px 18px 22px;
     text-align: center;
-    background: var(--bg-raised);
-    box-shadow: 0 0 28px rgba(255,197,61,.22), inset 0 0 26px rgba(255,197,61,.10);
+    background:
+      linear-gradient(160deg, rgba(245,55,155,.16), rgba(123,108,246,.10) 55%, rgba(255,197,61,.08)),
+      var(--bg-raised);
+    box-shadow: 0 12px 32px rgba(0,0,0,.28), inset 0 1px 0 rgba(255,255,255,.07);
   }
   .marquee h1 {
     margin: 0;
     font-size: clamp(34px, 9vw, 52px);
     font-weight: 900;
-    letter-spacing: .02em;
-    line-height: .95;
+    letter-spacing: -.01em;
+    line-height: .98;
     text-transform: uppercase;
     text-wrap: balance;
     color: var(--ink);
-    text-shadow: 0 0 18px rgba(245,55,155,.55), 0 3px 0 rgba(0,0,0,.35);
   }
-  .marquee h1 .zap { color: var(--accent); }
+  .marquee h1 .zap {
+    background: linear-gradient(90deg, var(--accent), var(--brass));
+    -webkit-background-clip: text; background-clip: text;
+    -webkit-text-fill-color: transparent; color: transparent;
+  }
   .marquee p {
-    margin: 10px 0 0;
-    color: var(--brass);
-    font-size: 13px;
+    margin: 12px 0 0;
+    color: var(--dim);
+    font-size: 12px;
     font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: .18em;
-  }
-  @keyframes flicker { 0%,100% { opacity: 1; } 92% { opacity: 1; } 94% { opacity: .65; } 96% { opacity: 1; } }
-  @media (prefers-reduced-motion: no-preference) {
-    .marquee h1 { animation: flicker 7s infinite; }
+    letter-spacing: .22em;
   }
 
   .howto {
     background: var(--bg-raised);
     border: 1px solid var(--line);
-    border-radius: 14px;
+    border-radius: 16px;
     padding: 14px 16px;
     color: var(--dim);
     font-size: 14px;
@@ -105,12 +114,12 @@
   .howto .tilt-hint { color: var(--brass); font-weight: 700; }
 
   .section-label {
-    font-size: 12px;
+    font-size: 11.5px;
     font-weight: 800;
-    letter-spacing: .2em;
+    letter-spacing: .22em;
     text-transform: uppercase;
     color: var(--dim);
-    margin: 2px 2px -12px;
+    margin: 4px 2px -12px;
   }
 
   .deck-grid {
@@ -120,30 +129,32 @@
   }
   .deck {
     display: flex; align-items: center; gap: 12px;
-    padding: 14px 12px;
-    background: var(--bg-raised);
-    border: 1.5px solid var(--line);
-    border-left: 6px solid var(--deck-c, var(--accent));
-    border-radius: 14px;
+    padding: 12px;
+    background:
+      linear-gradient(135deg, color-mix(in srgb, var(--deck-c, var(--accent)) 10%, transparent), transparent 65%),
+      var(--bg-raised);
+    border: 1px solid var(--line);
+    border-radius: 16px;
     text-align: left;
-    transition: transform .08s ease;
+    box-shadow: 0 2px 0 rgba(0,0,0,.18);
+    transition: transform .08s ease, border-color .15s;
   }
   .deck:active { transform: scale(.965); }
   .deck .icon {
     width: 44px; height: 44px; flex: none;
     display: grid; place-items: center;
     font-size: 24px;
-    background: color-mix(in srgb, var(--deck-c, var(--accent)) 18%, transparent);
-    border-radius: 12px;
+    background: color-mix(in srgb, var(--deck-c, var(--accent)) 22%, transparent);
+    border-radius: 13px;
   }
-  .deck .name { font-weight: 800; font-size: 15px; line-height: 1.15; }
+  .deck .name { font-weight: 800; font-size: 15px; line-height: 1.15; letter-spacing: -.005em; }
   .deck .count { color: var(--dim); font-size: 11.5px; font-weight: 600; margin-top: 2px; }
 
   .settings {
     display: flex; flex-direction: column; gap: 12px;
     background: var(--bg-raised);
     border: 1px solid var(--line);
-    border-radius: 14px;
+    border-radius: 16px;
     padding: 14px 16px;
   }
   .setting-row {
@@ -162,7 +173,7 @@
     color: var(--dim);
     font-variant-numeric: tabular-nums;
   }
-  .seg button[aria-pressed="true"] { background: var(--accent); color: #fff; }
+  .seg button[aria-pressed="true"] { background: var(--accent); color: #fff; box-shadow: 0 1px 6px rgba(245,55,155,.4); }
 
   .toggle {
     width: 52px; height: 30px; flex: none;
@@ -329,10 +340,13 @@
   .score-card {
     text-align: center;
     background: var(--bg-raised);
-    border: 6px dotted var(--brass);
-    border-radius: 20px;
-    padding: 22px 16px;
-    box-shadow: 0 0 28px rgba(255,197,61,.18);
+    border: 1px solid var(--line);
+    border-radius: 22px;
+    padding: 26px 16px;
+    background:
+      linear-gradient(160deg, rgba(245,55,155,.14), rgba(123,108,246,.08) 60%, transparent),
+      var(--bg-raised);
+    box-shadow: 0 12px 32px rgba(0,0,0,.28), inset 0 1px 0 rgba(255,255,255,.07);
   }
   .score-card .big {
     font-size: clamp(56px, 16vw, 96px);
@@ -607,6 +621,359 @@
       'The Dark Knight','Iron Man','Crystal Skull','Hancock','WALL-E','Kung Fu Panda','Twilight','Madagascar 2','Mamma Mia!','Slumdog Millionaire',
       'Avatar','Transformers 2','Half-Blood Prince','New Moon','Up','The Hangover','Star Trek','Sherlock Holmes','The Blind Side','Paranormal Activity',
       'Toy Story 3','Alice in Wonderland','Iron Man 2','Eclipse','Deathly Hallows Part 1','Inception','Despicable Me','Shrek Forever After','How to Train Your Dragon','The Social Network'
+    ]},
+    { id: 'countries', name: 'Countries', icon: '🌍', color: '#7B6CF6', words: [
+      'Brazil','Japan','Egypt','Canada','Australia','Italy','Mexico','India','Kenya','Norway',
+      'Argentina','Greece','Thailand','Peru','Iceland','Morocco','Switzerland','Vietnam','Ireland','Cuba',
+      'South Africa','New Zealand','Portugal','Jamaica','Germany','Spain','Chile','Sweden','Nepal','Saudi Arabia',
+      'Netherlands','Philippines','Colombia','Indonesia','Poland','Finland','Singapore','South Korea','Russia','China',
+      'France','Nigeria','Scotland','Hungary','Cambodia','Jordan'
+    ]},
+    { id: 'cities', name: 'World Cities', icon: '🏙️', color: '#F5379B', words: [
+      'Paris','Tokyo','New York','London','Dubai','Rome','Sydney','Rio de Janeiro','Cairo','Mumbai',
+      'Hong Kong','Las Vegas','Venice','Moscow','Berlin','Barcelona','Bangkok','Istanbul','Amsterdam','Los Angeles',
+      'Toronto','Mexico City','Buenos Aires','Cape Town','Seoul','Miami','San Francisco','Athens','Vienna','Prague',
+      'Dublin','Nashville','New Orleans','Hollywood','Delhi','Hyderabad','Bangalore','Jerusalem','Shanghai','Lisbon',
+      'Honolulu','Seattle','Boston','Marrakech'
+    ]},
+    { id: 'states', name: 'US States', icon: '🗺️', color: '#FFC53D', words: [
+      'Texas','California','Florida','Alaska','Hawaii','Ohio','Nevada','Arizona','Colorado','Utah',
+      'Georgia','Louisiana','Montana','Maine','Oregon','Idaho','Kansas','Iowa','Michigan','Illinois',
+      'Kentucky','Tennessee','Alabama','Oklahoma','Nebraska','Vermont','Delaware','Wyoming','New Mexico','Minnesota',
+      'Wisconsin','Virginia','Washington','Massachusetts','New Jersey','Indiana','Missouri','South Dakota','Rhode Island'
+    ]},
+    { id: 'landmarks', name: 'Famous Landmarks', icon: '🗽', color: '#1FC16B', words: [
+      'Eiffel Tower','Statue of Liberty','Big Ben','Taj Mahal','Great Wall of China','Colosseum','Pyramids of Giza','Sydney Opera House','Golden Gate Bridge','Mount Rushmore',
+      'Stonehenge','Leaning Tower of Pisa','Machu Picchu','Niagara Falls','Grand Canyon','Christ the Redeemer','Burj Khalifa','Space Needle','Empire State Building','Buckingham Palace',
+      'Mount Everest','Angkor Wat','Brooklyn Bridge','Hollywood Sign','Times Square','Petra','Acropolis','Great Barrier Reef','Sagrada Familia','Kremlin',
+      'CN Tower','Louvre','Arc de Triomphe','Alcatraz','White House','Easter Island','Victoria Falls','Mount Fuji','Red Fort','Gateway of India'
+    ]},
+    { id: 'fastfood', name: 'Fast Food & Chains', icon: '🍔', color: '#7B6CF6', words: [
+      'McDonald’s','Burger King','Wendy’s','Taco Bell','Chick-fil-A','KFC','Subway','Domino’s','Pizza Hut','Starbucks',
+      'Dunkin’','Chipotle','In-N-Out','Five Guys','Popeyes','Panda Express','Sonic','Arby’s','Dairy Queen','Panera',
+      'Shake Shack','Papa John’s','Jack in the Box','Krispy Kreme','Olive Garden','Applebee’s','IHOP','Waffle House','Cheesecake Factory','Red Lobster',
+      'Chuck E. Cheese','Baskin-Robbins','Little Caesars','Jamba Juice','White Castle','Cinnabon','Auntie Anne’s','Denny’s','Buffalo Wild Wings','Outback Steakhouse'
+    ]},
+    { id: 'candy', name: 'Candy & Snacks', icon: '🍬', color: '#F5379B', words: [
+      'Snickers','Skittles','M&M’s','Twizzlers','Reese’s Cups','Kit Kat','Sour Patch Kids','Starburst','Hershey’s Kisses','Twix',
+      'Milky Way','Jolly Rancher','Gummy Bears','Swedish Fish','Nerds','Pop Rocks','Laffy Taffy','Tootsie Roll','Jelly Beans','Candy Corn',
+      'Lollipop','Doritos','Cheetos','Pringles','Lay’s','Goldfish','Cheez-It','Oreo','Pop-Tarts','Fruit Roll-Ups',
+      'Rice Krispies Treats','Fun Dip','Airheads','Mentos','Peeps','Ring Pop','Whoppers','Butterfinger','Funyuns'
+    ]},
+    { id: 'cereal', name: 'Breakfast Foods', icon: '🥣', color: '#FFC53D', words: [
+      'Cheerios','Froot Loops','Frosted Flakes','Lucky Charms','Cap’n Crunch','Cinnamon Toast Crunch','Honey Nut Cheerios','Corn Flakes','Rice Krispies','Cocoa Puffs',
+      'Trix','Fruity Pebbles','Apple Jacks','Honey Bunches of Oats','Raisin Bran','Wheaties','Special K','Frosted Mini-Wheats','Count Chocula','Golden Grahams',
+      'Kix','Life','Cookie Crisp','Corn Pops','Reese’s Puffs','Chex','Grape-Nuts','Oatmeal','French Toast','Muffin',
+      'Granola','Smoothie Bowl','Hash Browns','Bacon and Eggs','Breakfast Burrito','Biscuits and Gravy'
+    ]},
+    { id: 'produce', name: 'Fruits & Veggies', icon: '🥕', color: '#1FC16B', words: [
+      'Banana','Strawberry','Mango','Avocado','Coconut','Kiwi','Pomegranate','Grapes','Blueberry','Peach',
+      'Cherry','Lemon','Papaya','Dragon Fruit','Broccoli','Carrot','Potato','Tomato','Cucumber','Eggplant',
+      'Pumpkin','Mushroom','Onion','Garlic','Cauliflower','Spinach','Celery','Bell Pepper','Sweet Potato','Cabbage',
+      'Asparagus','Radish','Zucchini','Artichoke','Beet','Peas'
+    ]},
+    { id: 'desserts', name: 'Desserts & Sweets', icon: '🍰', color: '#7B6CF6', words: [
+      'Tiramisu','Brownie','Ice Cream Sundae','Crème Brûlée','Churros','Macarons','Cookie Dough','Funnel Cake','Baklava','Flan',
+      'Gulab Jamun','Jalebi','Rasmalai','Cannoli','Pudding','Cinnamon Roll','Éclair','Pecan Pie','Red Velvet Cake','Mochi',
+      'Gelato','Frozen Yogurt','Popsicle','Snow Cone','Caramel Apple','Lava Cake','Bread Pudding','Key Lime Pie','Fudge','Waffle Cone',
+      'Cake Pop','Baked Alaska'
+    ]},
+    { id: 'icecream', name: 'Ice Cream & Drinks', icon: '🍦', color: '#F5379B', words: [
+      'Chocolate Chip','Cookies and Cream','Rocky Road','Mint Chip','Neapolitan','Butter Pecan','Pistachio','Mango Kulfi','Boba Tea','Chai',
+      'Cold Brew','Pumpkin Spice Latte','Matcha','Root Beer Float','Orange Juice','Coconut Water','Iced Coffee','Frappuccino','Sparkling Water','Kombucha',
+      'Gatorade','Red Bull','Coca-Cola','Pepsi','Sprite','Dr Pepper','Mountain Dew','Capri-Sun','Kool-Aid','Slushie',
+      'Eggnog','Apple Cider','Mango Lassi','Thums Up','Fanta','Arnold Palmer','Sweet Tea'
+    ]},
+    { id: 'boardgames', name: 'Board & Card Games', icon: '🎲', color: '#FFC53D', words: [
+      'Monopoly','Scrabble','Clue','Risk','Battleship','Candy Land','Chutes and Ladders','Connect Four','Jenga','Uno',
+      'Operation','Trouble','Sorry!','Settlers of Catan','Ticket to Ride','Pictionary','Trivial Pursuit','Mouse Trap','Hungry Hungry Hippos','Guess Who?',
+      'Cranium','Taboo','Charades','Apples to Apples','Cards Against Humanity','Exploding Kittens','Go Fish','Rummy','Solitaire','Dominoes',
+      'Mahjong','Ludo','Carrom'
+    ]},
+    { id: 'videogames', name: 'Video Games', icon: '🎮', color: '#1FC16B', words: [
+      'Minecraft','Fortnite','Tetris','Pac-Man','Pong','Space Invaders','Fall Guys','Among Us','Roblox','Call of Duty',
+      'FIFA','Madden','Grand Theft Auto','The Sims','Candy Crush','Angry Birds','Flappy Bird','Temple Run','Subway Surfers','Animal Crossing',
+      'Zelda','Skyrim','Halo','Overwatch','League of Legends','Rocket League','Just Dance','Guitar Hero','Dance Dance Revolution','Wii Sports',
+      'Mario Kart','Super Smash Bros.','Donkey Kong','Street Fighter','Mortal Kombat','Portal','Stardew Valley','Cuphead','Tony Hawk’s Pro Skater','Crash Bandicoot'
+    ]},
+    { id: 'mario', name: 'Nintendo & Mario', icon: '🍄', color: '#7B6CF6', words: [
+      'Mario','Luigi','Princess Peach','Bowser','Yoshi','Toad','Wario','Waluigi','Link','Kirby',
+      'Samus','Fox McCloud','Captain Falcon','Isabelle','Tom Nook','Goomba','Koopa Troopa','Piranha Plant','Bullet Bill','Boo',
+      'Shy Guy','Super Mushroom','Fire Flower','Super Star','Warp Pipe','Blue Shell','Banana Peel','Question Block','Rainbow Road','Lakitu',
+      'Diddy Kong','King Boo','Ganon','Navi','Epona','Master Sword','Triforce'
+    ]},
+    { id: 'pokemon', name: 'Pokémon', icon: '⚡', color: '#F5379B', words: [
+      'Bulbasaur','Squirtle','Charmander','Jigglypuff','Eevee','Snorlax','Mewtwo','Mew','Psyduck','Gengar',
+      'Lucario','Gyarados','Magikarp','Togepi','Meowth','Ditto','Onix','Machamp','Alakazam','Vulpix',
+      'Growlithe','Lapras','Dragonite','Umbreon','Espeon','Greninja','Piplup','Mimikyu','Slowpoke','Raichu',
+      'Wobbuffet','Cubone','Misty','Brock','Team Rocket','Professor Oak','Poké Ball'
+    ]},
+    { id: 'heroes', name: 'Superheroes', icon: '🦸', color: '#FFC53D', words: [
+      'Wonder Woman','Captain America','Thor','Hulk','Black Widow','Black Panther','Hawkeye','Doctor Strange','Ant-Man','Captain Marvel',
+      'Wolverine','Storm','Cyclops','Deadpool','Flash','Green Lantern','Aquaman','Cyborg','Robin','Batgirl',
+      'Supergirl','Shazam','Daredevil','Punisher','Groot','Rocket Raccoon','Star-Lord','Gamora','Scarlet Witch','Vision',
+      'Falcon','Winter Soldier','Spider-Gwen','Miles Morales','Nightwing','Catwoman'
+    ]},
+    { id: 'villains', name: 'Movie Villains', icon: '😈', color: '#1FC16B', words: [
+      'Darth Vader','The Joker','Voldemort','Thanos','Hannibal Lecter','Freddy Krueger','Jason Voorhees','Michael Myers','Norman Bates','Lex Luthor',
+      'Loki','Magneto','Green Goblin','Dr. Octopus','Sauron','Gollum','Agent Smith','Terminator','Hans Gruber','The Wicked Witch',
+      'Hades','Syndrome','Bane','Two-Face','The Penguin','Riddler','Harley Quinn','Kylo Ren','Emperor Palpatine','Dracula',
+      'Frankenstein','Chucky'
+    ]},
+    { id: 'hogwarts', name: 'Wizarding World', icon: '🪄', color: '#7B6CF6', words: [
+      'Hermione Granger','Ron Weasley','Dumbledore','Snape','Hagrid','Draco Malfoy','Sirius Black','Luna Lovegood','Neville Longbottom','Dobby',
+      'Hedwig','Fluffy','Buckbeak','Gryffindor','Slytherin','Hufflepuff','Ravenclaw','Quidditch','Golden Snitch','Nimbus 2000',
+      'Butterbeer','Platform 9¾','Diagon Alley','Hogsmeade','Azkaban','Forbidden Forest','Sorting Hat','Invisibility Cloak','Marauder’s Map','Time-Turner',
+      'Polyjuice Potion','Expecto Patronum','Avada Kedavra','Expelliarmus','Horcrux','Basilisk','Whomping Willow','Triwizard Tournament'
+    ]},
+    { id: 'starwars', name: 'Star Wars', icon: '🚀', color: '#F5379B', words: [
+      'Luke Skywalker','Princess Leia','Han Solo','Chewbacca','Yoda','Obi-Wan Kenobi','R2-D2','C-3PO','Boba Fett','Jabba the Hutt',
+      'Lando Calrissian','Anakin Skywalker','Padmé Amidala','Mace Windu','Darth Maul','Jar Jar Binks','Rey','Finn','Poe Dameron','BB-8',
+      'Din Djarin','Grogu','Ahsoka Tano','Millennium Falcon','Death Star','X-Wing','TIE Fighter','Lightsaber','The Force','Tatooine',
+      'Hoth','Endor','Ewok','Stormtrooper','Wookiee','Jedi','Sith'
+    ]},
+    { id: 'lotr', name: 'Fantasy Worlds', icon: '🧙', color: '#FFC53D', words: [
+      'Gandalf','Frodo','Samwise','Aragorn','Legolas','Gimli','Bilbo Baggins','Smaug','Mordor','The Shire',
+      'Rivendell','Narnia','Aslan','Lucy Pevensie','Mr. Tumnus','Katniss Everdeen','Peeta','District 12','Percy Jackson','Eragon',
+      'Dragon','Unicorn','Griffin','Wizard','Dwarf','Orc','Troll','Goblin','Fairy','Mermaid',
+      'Centaur','Phoenix','Sword in the Stone','King Arthur','Excalibur','Merlin','Robin Hood'
+    ]},
+    { id: 'sitcoms', name: 'Sitcom Characters', icon: '🛋️', color: '#1FC16B', words: [
+      'Ross Geller','Rachel Green','Chandler Bing','Monica Geller','Joey Tribbiani','Phoebe Buffay','Michael Scott','Dwight Schrute','Jim Halpert','Pam Beesly',
+      'Sheldon Cooper','Penny','Leonard Hofstadter','Barney Stinson','Ted Mosby','Jerry Seinfeld','Kramer','George Costanza','Elaine Benes','Leslie Knope',
+      'Ron Swanson','Jake Peralta','Moira Rose','Fonzie','Al Bundy','Fran Drescher','Will Smith (Fresh Prince)','Steve Urkel','Hannah Montana','Lizzie McGuire',
+      'Kim Possible','Cosmo Kramer','Larry David','Uncle Phil'
+    ]},
+    { id: 'realitytv', name: 'Reality & Game Shows', icon: '📡', color: '#7B6CF6', words: [
+      'The Bachelorette','Love Island','Big Brother','The Voice','Dancing with the Stars','Top Chef','Hell’s Kitchen','The Amazing Race','Family Feud','The Price Is Right',
+      'Who Wants to Be a Millionaire','Deal or No Deal','The Masked Singer','Project Runway','RuPaul’s Drag Race','Keeping Up with the Kardashians','Jersey Shore','The Real Housewives','Queer Eye','Naked and Afraid',
+      'Fear Factor','Cake Boss','Chopped','Nailed It!','Love Is Blind','Too Hot to Handle','Kaun Banega Crorepati','Bigg Boss','Roadies','Indian Idol'
+    ]},
+    { id: 'nostalgia90s', name: '90s Kid Nostalgia', icon: '📼', color: '#F5379B', words: [
+      'Tamagotchi','Furby','Beanie Babies','Pogs','Game Boy','Walkman','Discman','Blockbuster','Dial-up Internet','AOL Instant Messenger',
+      'Tickle Me Elmo','Slap Bracelet','Hypercolor T-Shirt','Lisa Frank','Pokémon Cards','Polly Pocket','Super Soaker','Bop It','Etch A Sketch','Lite-Brite',
+      'Magic 8 Ball','Nokia Brick Phone','Floppy Disk','Clapper','Rugrats','Hey Arnold!','Dexter’s Laboratory','The Powerpuff Girls','Pokemon Yellow','Goosebumps',
+      'Magic School Bus','Bill Nye','Blue’s Clues','Barney','Teletubbies','Tamale Pie','Gak','Zubaz','Scrunchie','Butterfly Clips'
+    ]},
+    { id: 'classicrock', name: 'Classic Rock Bands', icon: '🎸', color: '#FFC53D', words: [
+      'Rolling Stones','Led Zeppelin','Pink Floyd','Queen','AC/DC','The Who','Fleetwood Mac','Eagles','Aerosmith','Guns N’ Roses',
+      'Metallica','Nirvana','Pearl Jam','Foo Fighters','U2','The Doors','Black Sabbath','Deep Purple','Van Halen','Kiss',
+      'Bon Jovi','Journey','Rush','Lynyrd Skynyrd','Creedence Clearwater Revival','The Beach Boys','Jimi Hendrix','Bruce Springsteen','Tom Petty','Bob Dylan',
+      'David Bowie','Billy Joel','Red Hot Chili Peppers','Green Day','Blink-182','Linkin Park'
+    ]},
+    { id: 'groups', name: 'Boy Bands & Girl Groups', icon: '🎤', color: '#7B6CF6', words: [
+      'NSYNC','Backstreet Boys','Jonas Brothers','New Kids on the Block','Boyz II Men','Jackson 5','TWICE','EXO','Spice Girls','Destiny’s Child',
+      'TLC','Pussycat Dolls','Fifth Harmony','Little Mix','The Supremes','Salt-N-Pepa','ABBA','Bee Gees','Take That','Westlife',
+      'Hanson','98 Degrees','Big Time Rush','The Monkees','Wham!','Black Eyed Peas','Mumford & Sons','OneRepublic','The Chainsmokers','Daft Punk',
+      'Gorillaz','Cheetah Girls'
+    ]},
+    { id: 'songs80s', name: '80s & 90s Hits', icon: '🪩', color: '#F5379B', words: [
+      'Billie Jean','Thriller','Like a Virgin','Girls Just Want to Have Fun','Take on Me','Don’t Stop Believin’','Livin’ on a Prayer','Sweet Child o’ Mine','Every Breath You Take','Africa',
+      'Eye of the Tiger','Footloose','Never Gonna Give You Up','Wannabe','Baby One More Time','Wonderwall','Smells Like Teen Spirit','Macarena','Gangsta’s Paradise','I Will Always Love You',
+      'My Heart Will Go On','Truly Madly Deeply','No Scrubs','Waterfalls','Vogue','Bohemian Rhapsody','Another One Bites the Dust','We Will Rock You','Hotel California','Stayin’ Alive',
+      'Dancing Queen','YMCA','Super Freak','U Can’t Touch This','Ice Ice Baby','Mambo No. 5','Gettin’ Jiggy wit It','Say My Name','Bye Bye Bye'
+    ]},
+    { id: 'country', name: 'Country Music', icon: '🤠', color: '#FFC53D', words: [
+      'Johnny Cash','Dolly Parton','Garth Brooks','Shania Twain','Willie Nelson','Luke Combs','Morgan Wallen','Carrie Underwood','Blake Shelton','Kenny Chesney',
+      'Tim McGraw','Faith Hill','Reba McEntire','George Strait','Alan Jackson','Hank Williams','Patsy Cline','Kacey Musgraves','Chris Stapleton','Zach Bryan',
+      'Lainey Wilson','Keith Urban','Brad Paisley','Miranda Lambert','Toby Keith','Randy Travis','Jason Aldean','Luke Bryan','Florida Georgia Line','Take Me Home, Country Roads',
+      'Friends in Low Places','Jolene','Achy Breaky Heart','Ring of Fire','Boot Scootin’ Boogie','Cowboy Boots','Pickup Truck','Banjo','Honky Tonk'
+    ]},
+    { id: 'instruments', name: 'Musical Instruments', icon: '🎹', color: '#1FC16B', words: [
+      'Piano','Guitar','Drums','Violin','Trumpet','Saxophone','Flute','Harp','Tuba','Trombone',
+      'Clarinet','Cello','Accordion','Harmonica','Ukulele','Bagpipes','Tambourine','Xylophone','Triangle','Cymbals',
+      'Bass Guitar','Electric Guitar','Keyboard','Synthesizer','Didgeridoo','Sitar','Tabla','Harmonium','Bongos','Maracas',
+      'Kazoo','Recorder','Oboe','Bassoon','French Horn','Cowbell','Gong','Organ','Mandolin','Steel Drums'
+    ]},
+    { id: 'broadway', name: 'Broadway Musicals', icon: '🎭', color: '#7B6CF6', words: [
+      'Hamilton','Wicked','Les Misérables','The Phantom of the Opera','Cats','Rent','Hairspray','Matilda','Annie','Oliver!',
+      'West Side Story','Fiddler on the Roof','The Sound of Music','My Fair Lady','Oklahoma!','Cabaret','Dear Evan Hansen','The Book of Mormon','Six','School of Rock',
+      'Beetlejuice','Come From Away','Into the Woods','Sweeney Todd','Evita','Jersey Boys','Waitress','Kinky Boots','Hadestown','Newsies',
+      'Little Shop of Horrors','Jesus Christ Superstar','Joseph and the Technicolor Dreamcoat'
+    ]},
+    { id: 'brands', name: 'Famous Brands', icon: '🏷️', color: '#F5379B', words: [
+      'Nike','Adidas','Apple','Google','Amazon','Netflix','Tesla','Lego','Disney','Nintendo',
+      'PlayStation','Xbox','Samsung','Microsoft','IKEA','Target','Walmart','Costco','Nutella','Crocs',
+      'Lululemon','Supreme','Gucci','Louis Vuitton','Rolex','Ray-Ban','Levi’s','Converse','Vans','Under Armour',
+      'Puma','Spotify','Uber','Airbnb','Instagram','TikTok','YouTube'
+    ]},
+    { id: 'cars', name: 'Cars & Car Brands', icon: '🚗', color: '#FFC53D', words: [
+      'Ferrari','Lamborghini','Porsche','Toyota Prius','Jeep Wrangler','Ford Mustang','Corvette','Volkswagen Beetle','Mini Cooper','Rolls-Royce',
+      'Bentley','Bugatti','McLaren','Maserati','Mercedes-Benz','BMW','Audi','Honda Civic','Chevy Camaro','Dodge Charger',
+      'Cybertruck','Hummer','Monster Truck','Minivan','Limousine','Taxi','School Bus','Ice Cream Truck','Fire Truck','Tow Truck',
+      'Tractor','Golf Cart','Go-Kart','Bumper Car','Batmobile','DeLorean','Herbie','Tuk-tuk'
+    ]},
+    { id: 'tech', name: 'Tech & Apps', icon: '📱', color: '#1FC16B', words: [
+      'iPhone','Snapchat','WhatsApp','Facebook','Twitter','DoorDash','Zoom','Google Maps','Siri','Alexa',
+      'ChatGPT','Bluetooth','Wi-Fi','Selfie Stick','Smart Watch','AirPods','Drone','Laptop','Mouse','Printer',
+      'Headphones','Charger','Emoji','GIF','Hashtag','Podcast','Livestream','Password','Screenshot','Autocorrect',
+      'QR Code','Robot Vacuum','Virtual Reality'
+    ]},
+    { id: 'slang', name: 'Internet & Slang', icon: '😎', color: '#7B6CF6', words: [
+      'Selfie','Meme','Going Viral','Influencer','Cancel Culture','Photobomb','Planking','Dabbing','Floss Dance','Rickroll',
+      'Ghosting','Swipe Right','Hot Take','Binge-Watching','Doomscrolling','FOMO','Main Character','No Cap','Slay','Rizz',
+      'Vibe Check','Sus','Bet','Salty','Lit','Yeet','Cringe','Flex','Glow Up','Stan',
+      'Simp','Touch Grass','Big Mood','Low-Key','High-Key','Shade','Receipts','Clout','Drip'
+    ]},
+    { id: 'jobs', name: 'Jobs & Professions', icon: '👷', color: '#F5379B', words: [
+      'Doctor','Teacher','Firefighter','Astronaut','Chef','Pilot','Police Officer','Plumber','Electrician','Farmer',
+      'Mail Carrier','Dentist','Lawyer','Judge','Nurse','Veterinarian','Barista','Bartender','Lifeguard','Photographer',
+      'Magician','Clown','DJ','Referee','Janitor','Mechanic','Carpenter','Painter','Hairdresser','Taxi Driver',
+      'Construction Worker','Scientist','Librarian','Detective','Spy','Pirate','Cowboy','Mime','Fortune Teller','Tour Guide'
+    ]},
+    { id: 'hobbies', name: 'Hobbies & Pastimes', icon: '🧶', color: '#FFC53D', words: [
+      'Knitting','Gardening','Painting','Baking','Hiking','Camping','Pottery','Photography','Birdwatching','Puzzles',
+      'Scrapbooking','Karaoke','Stand-Up Comedy','Magic Tricks','Origami','Calligraphy','Stargazing','Collecting Stamps','Coin Collecting','Geocaching',
+      'Journaling','Meditation','Woodworking','Sewing','Cosplay','Gaming','Podcasting','Vlogging','Playing Guitar','Thrifting',
+      'Bonsai','Rollerblading','Cross-Stitch'
+    ]},
+    { id: 'olympics', name: 'Olympic Sports', icon: '🥇', color: '#1FC16B', words: [
+      'Diving','Weightlifting','Cycling','Triathlon','Long Jump','High Jump','Discus','Relay Race','Synchronized Swimming','Trampoline',
+      'Skeleton','Bobsled','Luge','Speed Skating','Ski Jumping','Biathlon','Equestrian','Table Tennis','Water Polo','Handball',
+      'Gold Medal','Podium','Torch Relay','Opening Ceremony','Olympic Rings','Simone Biles','Michael Phelps','Nadia Comaneci','Katie Ledecky','Abhinav Bindra','Eliud Kipchoge','Mark Spitz','Jesse Owens','Dream Team','Medal Ceremony'
+    ]},
+    { id: 'nfl', name: 'NFL & Football', icon: '🏈', color: '#7B6CF6', words: [
+      'Patrick Mahomes','Tom Brady','Peyton Manning','Travis Kelce','Aaron Rodgers','Jerry Rice','Joe Montana','Dan Marino','Randy Moss','Lawrence Taylor',
+      'Cowboys','Packers','Patriots','Steelers','49ers','Chiefs','Bears','Giants','Raiders','Super Bowl',
+      'Touchdown','Field Goal','Fumble','Interception','Quarterback','Hail Mary','Tailgate','End Zone','Pick Six','Blitz',
+      'Fantasy Football','Gatorade Shower','Halftime Show','Lombardi Trophy','Heisman Trophy','Punt','Onside Kick','Two-Minute Warning','Fourth Down'
+    ]},
+    { id: 'nba', name: 'Basketball', icon: '🏀', color: '#F5379B', words: [
+      'Kobe Bryant','Stephen Curry','Shaquille O’Neal','Magic Johnson','Larry Bird','Kareem Abdul-Jabbar','Kevin Durant','Giannis Antetokounmpo','Luka Dončić','Allen Iverson',
+      'Dirk Nowitzki','Tim Duncan','Steve Nash','Lakers','Celtics','Bulls','Warriors','Knicks','Heat','Spurs',
+      'Slam Dunk','Three-Pointer','Buzzer Beater','Alley-Oop','Crossover','Free Throw','Air Ball','Triple-Double','Fast Break','Jump Ball',
+      'Rebound','Dribble','Airball','March Madness','Hoop','Fadeaway','Layup'
+    ]},
+    { id: 'soccer', name: 'Soccer', icon: '⚽', color: '#FFC53D', words: [
+      'Pelé','Diego Maradona','Neymar','Kylian Mbappé','Zinedine Zidane','David Beckham','Ronaldinho','Thierry Henry','Erling Haaland','Mohamed Salah',
+      'Zlatan Ibrahimović','Harry Kane','Real Madrid','Manchester United','Liverpool','Arsenal','Bayern Munich','World Cup','Penalty Kick','Offside',
+      'Red Card','Yellow Card','Corner Kick','Goalkeeper','Hat Trick','Header','Bicycle Kick','Free Kick','Throw-In','Dive',
+      'Tiki-Taka','Stadium Chant','Vuvuzela','Golden Boot','Champions League','El Clásico','Own Goal'
+    ]},
+    { id: 'cricket', name: 'Cricket', icon: '🏏', color: '#1FC16B', words: [
+      'Kapil Dev','Sunil Gavaskar','Rahul Dravid','Sourav Ganguly','Ravindra Jadeja','Yuvraj Singh','Virender Sehwag','Shane Warne','Ricky Ponting','Brian Lara',
+      'Jacques Kallis','Ben Stokes','Babar Azam','Wasim Akram','IPL','Ashes','Four','Wicket','Googly','Yorker',
+      'Bouncer','Century','Duck','Hat-Trick','LBW','Run Out','Cover Drive','Helicopter Shot','Powerplay','Super Over',
+      'Mankad','Third Umpire'
+    ]},
+    { id: 'dinosaurs', name: 'Dinosaurs & Prehistoric', icon: '🦖', color: '#7B6CF6', words: [
+      'Tyrannosaurus Rex','Velociraptor','Triceratops','Stegosaurus','Brachiosaurus','Spinosaurus','Pterodactyl','Ankylosaurus','Diplodocus','Allosaurus',
+      'Parasaurolophus','Brontosaurus','Mosasaurus','Megalodon','Woolly Mammoth','Saber-Toothed Tiger','Cave Man','Fossil','Meteor','Amber',
+      'Dino Egg','Excavation','Paleontologist','Land Before Time','Barney the Dinosaur','Archaeopteryx','Iguanodon','Compsognathus','Pachycephalosaurus','Giganotosaurus',
+      'Dilophosaurus','Gallimimus','Therizinosaurus','Utahraptor','Quetzalcoatlus','Dimetrodon','Trilobite'
+    ]},
+    { id: 'ocean', name: 'Ocean Life', icon: '🐙', color: '#F5379B', words: [
+      'Seahorse','Starfish','Sea Turtle','Manta Ray','Stingray','Clownfish','Pufferfish','Swordfish','Eel','Squid',
+      'Sea Otter','Sea Lion','Narwhal','Orca','Coral Reef','Barnacle','Sea Urchin','Anglerfish','Hammerhead','Great White',
+      'Angelfish','Blobfish','Sea Cucumber','Hermit Crab','Shrimp','Oyster','Clam','Seaweed','Pelican','Kraken'
+    ]},
+    { id: 'birds', name: 'Birds & Bugs', icon: '🦋', color: '#FFC53D', words: [
+      'Toucan','Hummingbird','Woodpecker','Pigeon','Crow','Seagull','Swan','Goose','Ostrich','Emu',
+      'Vulture','Hawk','Cardinal','Blue Jay','Ladybug','Grasshopper','Cricket','Dragonfly','Firefly','Cockroach',
+      'Caterpillar','Praying Mantis','Scorpion','Beetle',
+      'Cockatoo','Kingfisher','Sparrow','Hornbill','Albatross','Puffin','Heron','Stork','Dodo','Roadrunner','Canary','Magpie','Pheasant','Condor','Macaw','Wasp','Hornet','Flea'
+    ]},
+    { id: 'tools', name: 'Tools & Hardware', icon: '🔧', color: '#1FC16B', words: [
+      'Wrench','Pliers','Drill','Saw','Tape Measure','Level','Wheelbarrow','Shovel','Rake','Chainsaw',
+      'Nails','Screws','Sandpaper','Paintbrush','Crowbar','Axe','Blowtorch','Welding Mask','Jackhammer','Hard Hat',
+      'Safety Goggles','Work Gloves','Vise','Anvil','Pickaxe','Leaf Blower','Hedge Trimmer','Power Washer','Extension Cord','Flashlight',
+      'Super Glue','Staple Gun'
+    ]},
+    { id: 'fashion', name: 'Clothes & Fashion', icon: '👗', color: '#7B6CF6', words: [
+      'Jeans','Hoodie','Sneakers','Flip-Flops','Cowboy Hat','Tuxedo','Prom Dress','Bikini','Overalls','Leather Jacket',
+      'Sunglasses','Bow Tie','Tutu','Kilt','Poncho','Sari','Kurta','Lehenga','Beret','Fanny Pack',
+      'High Heels','Ugg Boots','Tie-Dye Shirt','Varsity Jacket','Bathrobe','Pajamas','Onesie','Lab Coat','Graduation Cap','Top Hat',
+      'Beanie','Bandana','Scarf','Mittens','Raincoat','Cargo Shorts','Tracksuit','Cape','Wedding Dress'
+    ]},
+    { id: 'kitchen', name: 'In the Kitchen', icon: '🍳', color: '#F5379B', words: [
+      'Whisk','Rolling Pin','Cutting Board','Colander','Ladle','Tongs','Oven Mitt','Apron','Pressure Cooker','Air Fryer',
+      'Slow Cooker','Waffle Iron','Bottle Opener','Corkscrew','Garlic Press','Pizza Cutter','Measuring Cup','Mixing Bowl','Tea Kettle','Coffee Maker',
+      'Freezer','Pantry','Sink','Stove','Timer','Peeler','Mortar and Pestle','Chopsticks','Ice Cube Tray','Salad Spinner',
+      'Turkey Baster'
+    ]},
+    { id: 'summer', name: 'Summer & Beach', icon: '🏖️', color: '#FFC53D', words: [
+      'Sunscreen','Beach Ball','Sandcastle','Surfboard','Snorkel','Seashell','Sunburn','Lemonade Stand','Water Balloon','Slip ’N Slide',
+      'Pool Float','Cannonball','Barbecue','Campfire','Road Trip','Fireworks','Hammock','Beach Towel','Boogie Board','Jet Ski',
+      'Kayak','Paddleboard','Tan Lines','Fireflies','Picnic','Lawn Chair','Cooler','Mosquito Bite','Sand Dune','Tiki Torch',
+      'Flamingo Float','Summer Camp','Drive-In Movie'
+    ]},
+    { id: 'holidays', name: 'Holidays Worldwide', icon: '🎉', color: '#1FC16B', words: [
+      'Diwali','Holi','Eid','Hanukkah','Christmas','Easter','Thanksgiving','Halloween','New Year’s Eve','Valentine’s Day',
+      'St. Patrick’s Day','Fourth of July','Cinco de Mayo','Chinese New Year','Day of the Dead','Oktoberfest','Mardi Gras','Carnival','Ramadan','Navratri',
+      'Raksha Bandhan','Ganesh Chaturthi','Pongal','Onam','Lunar New Year','Labor Day','Memorial Day','Mother’s Day','Father’s Day','April Fools’ Day',
+      'Black Friday','Boxing Day','Passover','Lent','Kwanzaa','Burning Man','Super Bowl Sunday','Earth Day','Birthday'
+    ]},
+    { id: 'halloween', name: 'Halloween', icon: '🎃', color: '#7B6CF6', words: [
+      'Jack-o’-Lantern','Witch','Werewolf','Zombie','Mummy','Black Cat','Spider Web','Haunted House','Trick or Treat','Costume',
+      'Broomstick','Cauldron','Graveyard','Tombstone','Scarecrow','Frankenstein’s Monster','Grim Reaper','Headless Horseman','Bloody Mary','Ouija Board',
+      'Crystal Ball','Fog Machine','Pillowcase','Bobbing for Apples','Corn Maze','Hayride','Fake Blood','Vampire Fangs','Mask','Creepy Doll',
+      'Hocus Pocus','Nightmare Before Christmas','Casper'
+    ]},
+    { id: 'christmas', name: 'Christmas', icon: '🎄', color: '#F5379B', words: [
+      'Santa Claus','Rudolph','Reindeer','Snowman','Christmas Tree','Gingerbread House','Candy Cane','Stocking','Mistletoe','Wreath',
+      'Ornament','Tinsel','Sleigh','North Pole','Fruitcake','Hot Cocoa','Snow Globe','Nutcracker','Jingle Bells','Silent Night',
+      'Carolers','Ugly Sweater','Wrapping Paper','Secret Santa','Advent Calendar','Yule Log','Frosty','Grinch','Scrooge','Buddy the Elf',
+      'Polar Express','Kevin McCallister','Angels','Nativity Scene','Snowball Fight','Sledding','Gift Card'
+    ]},
+    { id: 'space', name: 'Space & Planets', icon: '🪐', color: '#FFC53D', words: [
+      'Mercury','Venus','Earth','Mars','Jupiter','Saturn','Uranus','Neptune','The Moon','The Sun',
+      'Black Hole','Supernova','Comet','Asteroid','Meteor Shower','Big Dipper','Orion’s Belt','Space Station','Rocket','Satellite',
+      'Moon Landing','Neil Armstrong','Hubble Telescope','Rover','Alien','UFO','Zero Gravity','Space Suit','Mission Control','Constellation',
+      'Shooting Star','Nebula','Galaxy','Telescope','Mars Rover','SpaceX'
+    ]},
+    { id: 'science', name: 'Science & Inventions', icon: '🔬', color: '#1FC16B', words: [
+      'Microscope','Telephone','Airplane','Printing Press','Penicillin','Vaccine','Magnet','Gravity','Electricity','Lightning',
+      'DNA','Volcano','Earthquake','Tornado','Hurricane','Rainbow','Periodic Table','Atom','Dinosaur Bones','Lab Experiment',
+      'Bunsen Burner','Test Tube','Beaker','Petri Dish','Marie Curie','Nikola Tesla','Thomas Edison','Charles Darwin','Stephen Hawking','Wheel',
+      'Compass','Steam Engine','Radio','Laser','Robot','Solar Panel'
+    ]},
+    { id: 'myth', name: 'Mythology & Legends', icon: '⚡', color: '#7B6CF6', words: [
+      'Zeus','Poseidon','Athena','Apollo','Aphrodite','Medusa','Pegasus','Minotaur','Hydra','Trojan Horse',
+      'Achilles','Odysseus','Odin','Valkyrie','Anubis','Ra','Osiris','Sphinx','Bigfoot','Loch Ness Monster',
+      'Chupacabra','Yeti','Fairy Godmother','Leprechaun','King Midas','Atlas','Prometheus','Hanuman'
+    ]},
+    { id: 'fairytales', name: 'Fairy Tales & Nursery Rhymes', icon: '📖', color: '#F5379B', words: [
+      'Sleeping Beauty','Little Red Riding Hood','Hansel and Gretel','Goldilocks','The Three Little Pigs','Jack and the Beanstalk','The Ugly Duckling','Rumpelstiltskin','The Gingerbread Man','Humpty Dumpty',
+      'Jack and Jill','Little Miss Muffet','Mary Had a Little Lamb','Twinkle Twinkle Little Star','Old MacDonald','Row Row Row Your Boat','Itsy Bitsy Spider','Baa Baa Black Sheep','Wheels on the Bus','Hickory Dickory Dock',
+      'London Bridge','Three Blind Mice','Little Bo Peep','Mother Goose','The Frog Prince','Puss in Boots','The Emperor’s New Clothes','Tom Thumb','Big Bad Wolf','Cheshire Cat',
+      'Mad Hatter','Tortoise and the Hare','Pied Piper'
+    ]},
+    { id: 'history', name: 'Historical Figures', icon: '🏛️', color: '#FFC53D', words: [
+      'Queen Victoria','Joan of Arc','Christopher Columbus','Michelangelo','Mahatma Gandhi','Martin Luther King Jr.','Nelson Mandela','Rosa Parks','Winston Churchill','Genghis Khan',
+      'Alexander the Great','King Tut','Henry VIII','Marie Antoinette','Amelia Earhart','Harriet Tubman','Benjamin Franklin','Thomas Jefferson','Ashoka','Akbar',
+      'Shivaji','Rani Lakshmibai','Subhas Chandra Bose','Confucius','Socrates','Marco Polo','Sacagawea','Anne Frank','Mother Teresa'
+    ]},
+    { id: 'duos', name: 'Famous Duos', icon: '👯', color: '#1FC16B', words: [
+      'Batman and Robin','Sherlock and Watson','Mario and Luigi','Bonnie and Clyde','Romeo and Juliet','Laurel and Hardy','Ben and Jerry','Ant and Dec','Simon and Garfunkel','Hall and Oates',
+      'Thelma and Louise','Wayne and Garth','Bert and Ernie','Timon and Pumbaa','Woody and Buzz','Shrek and Donkey','Scooby and Shaggy','Ren and Stimpy','Spongebob and Patrick','Phineas and Ferb',
+      'Beavis and Butt-Head','Cheech and Chong','Jay and Silent Bob','Starsky and Hutch','Mulder and Scully','Jekyll and Hyde','Abbott and Costello','Siegfried and Roy','Tom Hanks and Meg Ryan','Lennon and McCartney',
+      'Jai and Veeru','Salim–Javed','Anthony and Cleopatra','Sonny and Cher','Fred and Wilma','Lilo and Stitch'
+    ]},
+    { id: 'idioms', name: 'Phrases & Idioms', icon: '💬', color: '#7B6CF6', words: [
+      'Piece of Cake','Break a Leg','Spill the Beans','Under the Weather','Raining Cats and Dogs','Hit the Hay','Bite the Bullet','Cost an Arm and a Leg','Once in a Blue Moon','Let the Cat Out of the Bag',
+      'Barking Up the Wrong Tree','Elephant in the Room','Kick the Bucket','Cut to the Chase','Bite Off More Than You Can Chew','The Last Straw','Beat Around the Bush','Burn the Midnight Oil','Cry Over Spilled Milk','Don’t Count Your Chickens',
+      'Back to Square One','Ball Is in Your Court','Hit the Nail on the Head','Icing on the Cake','On Cloud Nine','Throw Under the Bus','Wild Goose Chase','Cold Turkey','Face the Music','Jump the Gun',
+      'Add Fuel to the Fire','Birds of a Feather','Butterflies in Your Stomach','Out of the Blue','Pulling My Leg','Sleep Like a Log','Speak of the Devil','Take It with a Grain of Salt','Throw in the Towel','Walking on Eggshells'
+    ]},
+    { id: 'indianfood', name: 'Indian Food', icon: '🍛', color: '#F5379B', words: [
+      'Biryani','Butter Chicken','Samosa','Dosa','Idli','Vada Pav','Pani Puri','Chole Bhature','Paneer Tikka','Naan',
+      'Roti','Paratha','Pav Bhaji','Masala Chai','Lassi','Rasgulla','Kheer','Dal Makhani','Palak Paneer','Tandoori Chicken',
+      'Rajma Chawal','Upma','Sambar','Rasam','Medu Vada','Pesarattu','Hyderabadi Haleem','Gongura','Pulihora','Bisi Bele Bath',
+      'Aloo Gobi','Poha','Dhokla','Kachori','Bhel Puri','Thali','Mango Pickle'
+    ]},
+    { id: 'southcinema', name: 'South Indian Cinema', icon: '🎞️', color: '#FFC53D', words: [
+      'Baahubali','RRR','Pushpa','KGF','Kantara','Magadheera','Arjun Reddy','Eega','Vikram','Jailer',
+      'Leo','Ponniyin Selvan','Enthiran','Sivaji','Kabali','Premam','Drishyam','Manjummel Boys','Kalki 2898 AD','Salaar',
+      'Ala Vaikunthapurramuloo','Rangasthalam','Sarileru Neekevvaru','Gabbar Singh','Pokiri','Athadu','Temper','Julayi','Dhruva','Maharshi',
+      'Bharat Ane Nenu','Srimanthudu','Jersey','Sita Ramam','Hi Nanna','Sye','Yamadonga','Mirchi','Darling','Mahesh Babu',
+      'Vijay','Ajith','Samantha','Rashmika Mandanna','Chiranjeevi','Pawan Kalyan','Ravi Teja','Nani','Vijay Deverakonda','Dulquer Salmaan',
+      'Mohanlal','Mammootty'
+    ]},
+    { id: 'dancemoves', name: 'Dance Moves & Crazes', icon: '💃', color: '#1FC16B', words: [
+      'The Floss','Dab','Moonwalk','Cha Cha Slide','Electric Slide','Cupid Shuffle','The Worm','Running Man','Twist','Hustle',
+      'Harlem Shake','Whip','Nae Nae','Dougie','Carlton','Thriller Dance','Hand Jive','Chicken Dance','Hokey Pokey','Lawnmower',
+      'Shopping Cart','Raise the Roof','Mashed Potato','Twerk','Breakdance','Headspin','Salsa','Tango','Waltz','Bhangra',
+      'Garba','Kathak','Hook Step'
     ]}
   ];
 
