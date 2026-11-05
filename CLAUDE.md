@@ -13,7 +13,7 @@ Everything lives in the `DECKS` array inside the inline `<script>` in `index.htm
 { id: 'unique-id', name: 'Deck Name', icon: '🎵', color: '#F5379B', words: ['Card one', 'Card two', ...] }
 ```
 
-- Deck colors rotate through: `#F5379B` (magenta), `#FFC53D` (brass), `#1FC16B` (green), `#7B6CF6` (violet).
+- Deck colors rotate through: `#F5379B` (magenta), `#FFC53D` (brass), `#1FC16B` (green), `#27B1D0` (teal).
 - Aim for ~50 cards per deck; keep entries short enough to read across a room, family-friendly by default.
 - Use curly apostrophes (’) inside single-quoted JS strings — no backslash escapes.
 - Commit and push to `main`; Pages redeploys the same URL in ~1 minute. Nothing to reinstall on the phone.
